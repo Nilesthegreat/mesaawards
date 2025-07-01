@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MESA Awards 2025</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <img src="img/fcfmt.jpg" alt="MESA Awards Logo" class="logo">
+      <h1>MESA AWARDS NOMINATIONS 2025</h1>
+      <p class="subtext">Dinner • Awards • Gala Night Edition</p>
+      <p class="subtext">🔥 It’s about to be legendary! 🔥</p>
+      <p id="countdown">Countdown loading...</p>
+      <button id="darkToggle" title="Toggle dark mode">🌙</button>
+    </header>
+
+    <section class="button-group">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLScr2P3A4A4qafigkH3fALtQt84OH2lxsoEIVM8nheKh1Huzew/viewform?usp=header" target="_blank">
+        <button class="btn nomination">🎤 Submit Nomination</button>
+      </a>
+      <a href="voting.html">
+        <button class="btn voting" disabled>🗳️ Vote Now (Opens July 10)</button>
+      </a>
+    </section>
+  </div>
+
+  <script>
+    // Countdown
+    const countdownEl = document.getElementById("countdown");
+    const voteBtn = document.querySelector(".voting");
+    const launchDate = new Date("July 10, 2025 12:00:00").getTime();
+
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const diff = launchDate - now;
+
+      if (diff <= 0) {
+        clearInterval(timer);
+        countdownEl.textContent = "🗳️ Voting is now OPEN!";
+        voteBtn.disabled = false;
+      } else {
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const m = Math.floor((diff / (1000 * 60)) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        countdownEl.textContent = `Voting starts in ${d}d ${h}h ${m}m ${s}s`;
+      }
+    }, 1000);
+
+    // Dark Mode Toggle
+    const toggle = document.getElementById("darkToggle");
+    toggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      toggle.textContent = document.body.classList.contains("dark") ? "☀️" : "🌙";
+    });
+  </script>
+</body>
+</html>
